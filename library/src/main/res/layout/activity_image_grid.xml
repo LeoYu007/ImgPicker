@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@id/preTopBar"
+        layout="@layout/include_top_bar" />
+
+    <RelativeLayout
+        android:id="@id/rlFolderRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@id/gridRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grid_bg" />
+
+        <LinearLayout
+            android:id="@id/compress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/m8"
+                android:text="@string/compress"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/f2" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_height"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/bottom_bar_color"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@id/btnDir"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:drawableEnd="@mipmap/text_indicator"
+                android:drawablePadding="@dimen/m4"
+                android:drawableRight="@mipmap/text_indicator"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/m16"
+                android:paddingRight="@dimen/m16"
+                android:text="@string/all_images"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/f6" />
+
+            <android.support.v4.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <View
+                android:layout_width="@dimen/common_divider"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/m12"
+                android:layout_marginTop="@dimen/m12"
+                android:background="@color/divider_color" />
+
+            <Button
+                android:id="@id/btnPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:paddingEnd="@dimen/m16"
+                android:paddingLeft="@dimen/m8"
+                android:paddingRight="@dimen/m16"
+                android:paddingStart="@dimen/m8"
+                android:text="@string/btn_preview"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/f6" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

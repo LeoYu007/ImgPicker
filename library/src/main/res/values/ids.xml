@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="statusbarutil_fake_status_bar_view" type="id" />
+    <item name="statusbarutil_translucent_view" type="id" />
+
+    <!--titlebar-->
+    <item name="btnBack" type="id" />
+    <item name="tvTitle" type="id" />
+    <item name="btnDel" type="id" />
+    <item name="btnOk" type="id" />
+
+    <!--gridActivity-->
+    <item name="topBar" type="id" />
+    <item name="rlFolderRoot" type="id" />
+    <item name="gridRv" type="id" />
+    <item name="compress" type="id" />
+    <item name="footer" type="id" />
+    <item name="btnDir" type="id" />
+    <item name="btnPreview" type="id" />
+
+    <!--preview-->
+    <item name="viewpager" type="id" />
+    <item name="preTopBar" type="id" />
+    <item name="bottomBar" type="id" />
+    <item name="cbCheck" type="id" />
+
+    <!--folderItem-->
+    <item name="ivCover" type="id" />
+    <item name="tvFolderName" type="id" />
+    <item name="tvImageCount" type="id" />
+    <item name="ivFolderCheck" type="id" />
+
+    <!--imageItem-->
+    <item name="ivThumb" type="id" />
+    <item name="mask" type="id" />
+    <item name="cbSelected" type="id" />
+
+    <!--folder-->
+    <item name="folderRv" type="id" />
+    <item name="margin" type="id" />
+
+</resources>

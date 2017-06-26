@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.adam.imgpicker.widget.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/m5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/selector_add_item"
+        android:background="@android:color/transparent"
+        android:id="@+id/iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</com.adam.imgpicker.widget.SquareRelativeLayout>

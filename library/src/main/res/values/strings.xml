@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">imgpicker</string>
+    <string name="top_bar_des">选择图片</string>
+    <string name="top_bar_ok">完成</string>
+    <string name="all_images">全部图片</string>
+    <string name="btn_preview">预览(0)</string>
+    <string name="choose_preview">选择</string>
+    <string name="take_photo">拍照</string>
+    <string name="image_count">共0张</string>
+
+    <string name="camera_permission_denied">相机权限被拒绝，无法打开相机</string>
+    <string name="read_permission_denied">读取权限被拒绝，无法读取本地图片</string>
+
+    <string name="camera_error">相机发生错误</string>
+    <string name="crop_error">裁剪图片错误</string>
+    <string name="compress">正在压缩</string>
+
+
+</resources>
