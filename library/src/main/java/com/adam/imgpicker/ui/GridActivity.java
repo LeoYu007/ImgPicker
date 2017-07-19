@@ -19,6 +19,7 @@ import com.adam.imgpicker.R;
 import com.adam.imgpicker.adapter.ImageFolderAdapter;
 import com.adam.imgpicker.adapter.ImageGridAdapter;
 import com.adam.imgpicker.adapter.baseadapter.RecyclerAdapter;
+import com.adam.imgpicker.compress.BatchCompressTask;
 import com.adam.imgpicker.compress.Compresor;
 import com.adam.imgpicker.core.ImageDataSource;
 import com.adam.imgpicker.core.OnSelectedListSizeChangeListener;
@@ -118,7 +119,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
         }
 
         if (mConfig.compress) {
-            mCompresor = new Compresor.Builder(getApplicationContext())
+            mCompresor = new Compresor.Builder(GridActivity.this)
                     .setMaxWidth(mConfig.maxWidth)
                     .setMaxHeight(mConfig.maxHeight)
                     .setQuality(mConfig.quality)
@@ -216,8 +217,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
 
         mImgPicker.setImageFolders(imageFolders);
         mFolderAdapter.refreshData(imageFolders);
-        if (!imageFolders.isEmpty())
-            mGridAdapter.refreshData(imageFolders.get(0).images);
+        mGridAdapter.refreshData(imageFolders.get(0).images);
     }
 
     /**
@@ -349,17 +349,17 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
      * @param data 待压缩的图片集合
      */
     private void compressAndFinish(List<ImageItem> data) {
-        mCompresor.compressToFileAsync(data, new Compresor.Converter<ImageItem>() {
+        mCompresor.compressToFileAsync(data, new BatchCompressTask.Converter<ImageItem>() {
             @Override
             public File conver(ImageItem item) {
                 return new File(item.path);
             }
 
             @Override
-            public void assignin(ImageItem item, String path) {
-                item.compressPath = path;
+            public void assignin(ImageItem item, File compressFile) {
+                item.compressPath = compressFile.getAbsolutePath();
             }
-        }, new Compresor.OnBatchCompressListener<ImageItem>() {
+        }, new BatchCompressTask.OnBatchCompressListener<ImageItem>() {
             @Override
             public void onStart() {
                 compressProgress.setVisibility(View.VISIBLE);
