@@ -2,10 +2,9 @@ package com.adam.imgpicker.compress;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.IntRange;
-
-import com.zxy.tiny.Tiny;
-import com.zxy.tiny.callback.FileBatchCallback;
+import android.util.Log;
 
 import java.io.File;
 import java.util.List;
@@ -42,60 +41,63 @@ public class Compresor {
      * @param listener  回调
      * @param <T>       对象类型
      */
-    public <T> void compressToFileAsync(final List<T> entities,
-                                        final Converter<T> converter,
-                                        final OnBatchCompressListener<T> listener) {
-        if (listener != null) listener.onStart();
-
-        File[] files = new File[entities.size()];
-        for (int i = 0; i < entities.size(); i++) {
-            files[i] = converter.conver(entities.get(i));
-        }
-
-        Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
-        Tiny.getInstance().source(files).batchAsFile().withOptions(options).batchCompress(new FileBatchCallback() {
-            @Override
-            public void callback(boolean isSuccess, String[] outfile) {
-                if (listener != null) {
-                    for (int i = 0; i < entities.size(); i++) {
-                        converter.assignin(entities.get(i), outfile[i]);
-                    }
-                    listener.onSuccess(entities);
-                    listener.onComplete();
-                }
-            }
-        });
+    public <T> void compressToFileAsync(List<T> entities,
+                                        BatchCompressTask.Converter<T> converter,
+                                        BatchCompressTask.OnBatchCompressListener<T> listener) {
+        new BatchCompressTask<T>(this, converter, listener).execute(entities);
     }
 
     /**
-     * 批量压缩监听
+     * 批量异步压缩图片
      *
-     * @param <T>
+     * @param files    原始文件集合
+     * @param listener 回调
      */
-    public interface OnBatchCompressListener<T> {
-        void onStart();
+    public void compressToFileAsync(List<File> files, BatchCompressTask.OnBatchCompressListener<File> listener) {
+        compressToFileAsync(files, new BatchCompressTask.Converter<File>() {
+            @Override
+            public File conver(File file) {
+                return file;
+            }
 
-        void onSuccess(List<T> result);
-
-        void onComplete();
+            @Override
+            public void assignin(File file, File compressFile) {
+                file = compressFile;
+                Log.e("compresor", "compressFile path = " + file.getAbsolutePath());
+            }
+        }, listener);
     }
 
-    public interface Converter<T> {
-        /**
-         * 把传入的对象转换为需要压缩的图片File
-         *
-         * @param t 对象
-         * @return 图片文件
-         */
-        File conver(T t);
+    /**
+     * 异步压缩成文件
+     *
+     * @param file     原始文件
+     * @param listener 回调接口
+     */
+    public void compressToFileAsync(File file, DefaultCompressTask.OnCompressListener listener) {
+        new DefaultCompressTask(this, listener).execute(file);
+    }
 
-        /**
-         * 压缩完成后，把文件或者地址赋值给对象
-         *
-         * @param t                对象
-         * @param compressFilePath 压缩后的文件地址
-         */
-        void assignin(T t, String compressFilePath);
+    /**
+     * 同步压缩成文件
+     *
+     * @param file 原始文件
+     * @return 压缩后的文件
+     */
+    public File compressToFile(File file) {
+        return ImageUtil.compressImage(context, Uri.fromFile(file), maxWidth, maxHeight,
+                compressFormat, bitmapConfig, quality, destinationDirectoryPath,
+                fileNamePrefix, fileName);
+    }
+
+    /**
+     * 同步压缩为Bitmap
+     *
+     * @param file 原始文件
+     * @return 压缩后的Bitmap
+     */
+    public Bitmap compressToBitmap(File file) {
+        return ImageUtil.getScaledBitmap(context, Uri.fromFile(file), maxWidth, maxHeight, bitmapConfig);
     }
 
 
