@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.IntRange;
 
-import com.zxy.tiny.Tiny;
-import com.zxy.tiny.callback.FileBatchCallback;
+import com.adam.imgpicker.compress.tiny.Tiny;
+import com.adam.imgpicker.compress.tiny.callback.FileBatchCallback;
 
 import java.io.File;
 import java.util.List;
@@ -52,7 +52,7 @@ public class Compresor {
             files[i] = converter.conver(entities.get(i));
         }
 
-        Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
+        Tiny.FileCompressOptions options = new Tiny.BatchFileCompressOptions();
         Tiny.getInstance().source(files).batchAsFile().withOptions(options).batchCompress(new FileBatchCallback() {
             @Override
             public void callback(boolean isSuccess, String[] outfile) {
