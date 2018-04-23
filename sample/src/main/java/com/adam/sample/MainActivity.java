@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecycler() {
-        RecyclerView rv = (RecyclerView) findViewById(R.id.rv);
+        RecyclerView rv = findViewById(R.id.rv);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new GridLayoutManager(this, 3));
         rv.addItemDecoration(new DividerGridItemDecoration(this));
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /** 预览(可删除)后获取结果刷新已选择的图片 */
+        /* 预览(可删除)后获取结果刷新已选择的图片 */
         if (requestCode == PreviewDelActivity.REQUEST_PREVIEW_CODE) {
             if (resultCode == RESULT_OK) {
                 List<ImageItem> imageItems = (List<ImageItem>) data.getSerializableExtra(PreviewDelActivity.KEY_PREVIEW_DEL_DATA);
