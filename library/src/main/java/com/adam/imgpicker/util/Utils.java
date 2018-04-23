@@ -2,8 +2,6 @@ package com.adam.imgpicker.util;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
@@ -87,13 +85,15 @@ public class Utils {
         intent.putExtra("noFaceDetection", false);
 
         // 将存储图片的uri读写权限授权给剪裁工具应用，否则会出现无法存储裁剪图片的情况
-        List<ResolveInfo> resInfoList = activity.getPackageManager()
-                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        for (ResolveInfo resolveInfo : resInfoList) {
-            String packageName = resolveInfo.activityInfo.packageName;
-            activity.grantUriPermission(packageName, outputUri,
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        }
+//        List<ResolveInfo> resInfoList = activity.getPackageManager()
+//                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+//        for (ResolveInfo resolveInfo : resInfoList) {
+//            String packageName = resolveInfo.activityInfo.packageName;
+//            activity.grantUriPermission(packageName, outputUri,
+//                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        }
+
+        FileProvider7.grantPermissions(activity, intent, outputUri, true);
         activity.startActivityForResult(intent, requestCode);
 
         return outputFile;

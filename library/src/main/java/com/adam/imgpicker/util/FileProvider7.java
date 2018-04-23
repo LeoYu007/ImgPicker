@@ -26,11 +26,10 @@ public class FileProvider7 {
         return fileUri;
     }
 
-    public static Uri getUriForFile24(Context context, File file) {
+    private static Uri getUriForFile24(Context context, File file) {
         return android.support.v4.content.FileProvider.getUriForFile(context,
-                context.getPackageName() + ".android7.fileprovider", file);
+                context.getPackageName() + ".android7.fileProvider", file);
     }
-
 
     public static void setIntentDataAndType(Context context, Intent intent, String type, File file, boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
@@ -44,7 +43,6 @@ public class FileProvider7 {
         }
     }
 
-
     public static void setIntentData(Context context, Intent intent, File file, boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
             intent.setData(getUriForFile(context, file));
@@ -56,7 +54,6 @@ public class FileProvider7 {
             intent.setData(Uri.fromFile(file));
         }
     }
-
 
     public static void grantPermissions(Context context, Intent intent, Uri uri, boolean writeAble) {
         int flag = Intent.FLAG_GRANT_READ_URI_PERMISSION;
