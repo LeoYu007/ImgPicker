@@ -8,6 +8,18 @@
  ![image](https://github.com/LambertCoding/ImgPicker/blob/master/image/image3.jpg)
 
 ## 使用方法
+```groovy
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://www.jitpack.io' }
+		}
+	}
+	
+	dependencies {
+	        implementation 'com.github.LambertCoding:ImgPicker:1.0.0'
+	}
+```
 
 1)初始化
 ```java
