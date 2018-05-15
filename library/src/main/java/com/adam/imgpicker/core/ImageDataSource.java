@@ -3,6 +3,7 @@ package com.adam.imgpicker.core;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -57,6 +58,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
         }
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader cursorLoader = null;
@@ -74,7 +76,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         imageFolders.clear();
         if (data != null) {
             ArrayList<ImageItem> allImages = new ArrayList<>();   // 所有图片的集合,不分文件夹
@@ -120,7 +122,8 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
                 ImageFolder allImagesFolder = new ImageFolder();
                 allImagesFolder.name = activity.getResources().getString(R.string.all_images);
                 allImagesFolder.path = "/";
-                allImagesFolder.cover = allImages.get(0);
+                if (!allImages.isEmpty())
+                    allImagesFolder.cover = allImages.get(0);
                 allImagesFolder.images = allImages;
                 allImagesFolder.selected = true;
                 imageFolders.add(0, allImagesFolder);  // 确保第一条是所有图片
@@ -132,7 +135,7 @@ public class ImageDataSource implements LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
     }
 

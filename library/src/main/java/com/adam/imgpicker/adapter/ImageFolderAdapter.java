@@ -32,7 +32,8 @@ public class ImageFolderAdapter extends RecyclerAdapter<ImageFolder> {
         holder.setText(R.id.tvFolderName, item.name)
                 .setText(R.id.tvImageCount, String.format("共%d张", item.images.size()))
                 .setVisibility(R.id.ivFolderCheck, item.selected ? View.VISIBLE : View.GONE);
-        imageLoader.displayImage(context, item.cover.path, holder.findViewAsImageView(R.id.ivCover));
+        if (null != item.cover)
+            imageLoader.displayImage(context, item.cover.path, holder.findViewAsImageView(R.id.ivCover));
     }
 
     /**

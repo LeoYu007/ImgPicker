@@ -129,34 +129,34 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void initView() {
-        mFolderRoot = (RelativeLayout) findViewById(R.id.rlFolderRoot);
+        mFolderRoot = findViewById(R.id.rlFolderRoot);
         compressProgress = findViewById(R.id.compress);
 
         View topBar = findViewById(R.id.preTopBar);
         if (mConfig.titleBarColor != -1)
             topBar.setBackgroundColor(mConfig.titleBarColor);
 
-        ImageView btnBack = (ImageView) topBar.findViewById(R.id.btnBack);
+        ImageView btnBack = topBar.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(this);
         if (mConfig.backResId != -1)
             btnBack.setImageResource(mConfig.backResId);
 
-        TextView tvTitle = (TextView) topBar.findViewById(R.id.tvTitle);
+        TextView tvTitle = topBar.findViewById(R.id.tvTitle);
         if (mConfig.titleTextColor != -1)
             tvTitle.setTextColor(mConfig.titleTextColor);
         if (mConfig.titleText != null)
             tvTitle.setText(mConfig.titleText);
 
-        mBtnOk = (Button) topBar.findViewById(R.id.btnOk);
+        mBtnOk = topBar.findViewById(R.id.btnOk);
         mBtnOk.setOnClickListener(this);
         if (mConfig.btnResId != -1)
             mBtnOk.setBackgroundResource(mConfig.btnResId);
         if (mConfig.btnTextColor != -1)
             mBtnOk.setTextColor(mConfig.btnTextColor);
 
-        mBtnDir = (Button) findViewById(R.id.btnDir);
+        mBtnDir = findViewById(R.id.btnDir);
         mBtnDir.setOnClickListener(this);
-        mBtnPre = (Button) findViewById(R.id.btnPreview);
+        mBtnPre = findViewById(R.id.btnPreview);
         mBtnPre.setOnClickListener(this);
 
         setSelectNumber();
@@ -170,7 +170,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
         }
 
         //  设置recyclerview
-        RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.gridRv);
+        RecyclerView mRecyclerView = findViewById(R.id.gridRv);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));

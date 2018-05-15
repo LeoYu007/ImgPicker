@@ -28,7 +28,7 @@
             android:theme="@style/ImagePickerTheme" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name=".core.ImagePickerFileProvider"
             android:authorities="${applicationId}.android7.imageFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
