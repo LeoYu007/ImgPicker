@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 public class ImagePickerConfig {
 
-    public int limited = 9;                     //  最多选择图片数
+    public int limited;                         //  最多选择图片数
     public boolean showCamera;                  //  第一个item是否显示相机
 
     public int backResId;                       //  返回按钮图标
@@ -29,10 +29,10 @@ public class ImagePickerConfig {
     public OnSelectListener listener;           //  选择完成的回调;
 
     public boolean needCrop;                    //  是否裁剪，仅单选有效
-    public int aspectX = 1;                     //  裁剪输出大小↓↓↓↓
-    public int aspectY = 1;
-    public int outputX = 400;
-    public int outputY = 400;
+    public int aspectX;                         //  裁剪输出大小↓↓↓↓
+    public int aspectY;
+    public int outputX;
+    public int outputY;
 
     public boolean compress;                    //  是否压缩
     public float maxWidth;                      //  压缩参数↓↓↓↓

@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author yu
  */
-public class Compresor {
+public class Compressor {
 
     private static final String FILES_PATH = "compresor";
 
@@ -29,7 +29,7 @@ public class Compresor {
     String fileNamePrefix;                  //  文件名前缀
     String fileName;                        //  文件名
 
-    private Compresor(Context context) {
+    private Compressor(Context context) {
         this.context = context;
         destinationDirectoryPath = context.getCacheDir().getPath() + File.pathSeparator + FILES_PATH;
     }
@@ -100,10 +100,10 @@ public class Compresor {
 
 
     public static class Builder {
-        private Compresor mCompresor;
+        private Compressor mCompresor;
 
         public Builder(Context context) {
-            mCompresor = new Compresor(context);
+            mCompresor = new Compressor(context);
         }
 
         public Builder setMaxWidth(float maxWidth) {
@@ -146,7 +146,7 @@ public class Compresor {
             return this;
         }
 
-        public Compresor build() {
+        public Compressor build() {
             return mCompresor;
         }
     }

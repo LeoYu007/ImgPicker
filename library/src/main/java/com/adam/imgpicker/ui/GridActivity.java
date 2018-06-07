@@ -19,7 +19,7 @@ import com.adam.imgpicker.R;
 import com.adam.imgpicker.adapter.ImageFolderAdapter;
 import com.adam.imgpicker.adapter.ImageGridAdapter;
 import com.adam.imgpicker.adapter.baseadapter.RecyclerAdapter;
-import com.adam.imgpicker.compress.Compresor;
+import com.adam.imgpicker.compress.Compressor;
 import com.adam.imgpicker.core.ImageDataSource;
 import com.adam.imgpicker.core.OnSelectedListSizeChangeListener;
 import com.adam.imgpicker.entity.ImageFolder;
@@ -55,7 +55,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
     private FolderPopUpWindow mFolderPopUpWindow;
     private File mPhotoFile;
     private File mCropFile;
-    private Compresor mCompresor;
+    private Compressor mCompressor;
     private View compressProgress;
 
     private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
@@ -107,18 +107,14 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
 
         initView();
 
-        if (mImgPicker.getImageFolders() != null) {
-            loadCompleted(mImgPicker.getImageFolders());
+        if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            loadImages();
         } else {
-            if (checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                loadImages();
-            } else {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
-            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_STORAGE);
         }
 
         if (mConfig.compress) {
-            mCompresor = new Compresor.Builder(getApplicationContext())
+            mCompressor = new Compressor.Builder(getApplicationContext())
                     .setMaxWidth(mConfig.maxWidth)
                     .setMaxHeight(mConfig.maxHeight)
                     .setQuality(mConfig.quality)
@@ -349,7 +345,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
      * @param data 待压缩的图片集合
      */
     private void compressAndFinish(List<ImageItem> data) {
-        mCompresor.compressToFileAsync(data, new Compresor.Converter<ImageItem>() {
+        mCompressor.compressToFileAsync(data, new Compressor.Converter<ImageItem>() {
             @Override
             public File conver(ImageItem item) {
                 return new File(item.path);
@@ -359,7 +355,7 @@ public class GridActivity extends BaseActivity implements View.OnClickListener {
             public void assignin(ImageItem item, String path) {
                 item.compressPath = path;
             }
-        }, new Compresor.OnBatchCompressListener<ImageItem>() {
+        }, new Compressor.OnBatchCompressListener<ImageItem>() {
             @Override
             public void onStart() {
                 compressProgress.setVisibility(View.VISIBLE);

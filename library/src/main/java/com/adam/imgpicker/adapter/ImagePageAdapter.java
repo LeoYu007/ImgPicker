@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.adam.imgpicker.ImagePicker;
 import com.adam.imgpicker.ImagePickerConfig;
 import com.adam.imgpicker.entity.ImageItem;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 预览大图的viewpager适配器
@@ -22,7 +22,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class ImagePageAdapter extends PagerAdapter {
 
     private ImagePickerConfig config;
-    private List<ImageItem> images = new ArrayList<>();
+    private List<ImageItem> images;
     private Activity mActivity;
     private PhotoViewClickListener listener;
 
@@ -48,9 +48,9 @@ public class ImagePageAdapter extends PagerAdapter {
         PhotoView photoView = new PhotoView(mActivity);
         ImageItem imageItem = images.get(position);
         config.loader.displayImage(mActivity, imageItem.path, photoView);
-        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+        photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
-            public void onPhotoTap(View view, float x, float y) {
+            public void onPhotoTap(ImageView view, float x, float y) {
                 if (listener != null)
                     listener.OnPhotoTapListener(view, x, y);
             }

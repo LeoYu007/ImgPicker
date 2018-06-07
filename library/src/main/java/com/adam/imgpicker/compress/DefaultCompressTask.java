@@ -12,9 +12,9 @@ import java.io.File;
 class DefaultCompressTask extends AsyncTask<File, Void, File> {
 
     private OnCompressListener listener;
-    private Compresor compresor;
+    private Compressor compresor;
 
-    public DefaultCompressTask(Compresor compresor, OnCompressListener listener) {
+    public DefaultCompressTask(Compressor compresor, OnCompressListener listener) {
         this.listener = listener;
         this.compresor = compresor;
     }

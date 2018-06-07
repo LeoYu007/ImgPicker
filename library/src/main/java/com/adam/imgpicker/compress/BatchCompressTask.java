@@ -15,9 +15,9 @@ public class BatchCompressTask<T> extends AsyncTask<List<T>, Void, List<T>> {
 
     private OnBatchCompressListener<T> listener;
     private Converter<T> converter;
-    private Compresor compresor;
+    private Compressor compresor;
 
-    public BatchCompressTask(Compresor compresor, Converter<T> converter, OnBatchCompressListener<T> listener) {
+    public BatchCompressTask(Compressor compresor, Converter<T> converter, OnBatchCompressListener<T> listener) {
         this.listener = listener;
         this.compresor = compresor;
         this.converter = converter;
