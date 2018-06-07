@@ -17,7 +17,7 @@
 	}
 	
 	dependencies {
-	        implementation 'com.github.LambertCoding:ImgPicker:1.0.0'
+	        implementation 'com.github.LambertCoding:ImgPicker:1.0.2'
 	}
 ```
 
