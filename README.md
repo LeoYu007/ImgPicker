@@ -1,4 +1,4 @@
-# ImagePicker
+# [DEPRECATED] ImagePicker
 仿微信照片选择组件
 
 ## 演示
